@@ -1,0 +1,14 @@
+---
+- hosts: debian-main
+  become: yes
+  become_method: su
+  tasks:
+    - name: Install sudo
+      ansible.builtin.apt:
+        name: sudo
+        state: present
+    - name: adding existing user 'sid' to group sudo
+      ansible.builtin.user:
+        name: 'sid'
+        groups: sudo
+        append: yes
